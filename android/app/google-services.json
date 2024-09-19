@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "547726645259",
+    "project_id": "connexv1",
+    "storage_bucket": "connexv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547726645259:android:b2278edce692ef916ecf0e",
+        "android_client_info": {
+          "package_name": "com.example.connex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnRjoQqFzB6mkRX--MmzudVUTZMtlVk8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547726645259:android:447d01dcaa83f07d6ecf0e",
+        "android_client_info": {
+          "package_name": "com.example.connexv1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnRjoQqFzB6mkRX--MmzudVUTZMtlVk8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547726645259:android:28a65dc475dc51506ecf0e",
+        "android_client_info": {
+          "package_name": "com.example.games"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnRjoQqFzB6mkRX--MmzudVUTZMtlVk8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
