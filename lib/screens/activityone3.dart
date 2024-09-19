@@ -9,10 +9,10 @@ class LevelOneScreen3 extends StatefulWidget {
 
 class _LevelOneScreenState extends State<LevelOneScreen3> {
   // Correct order of image names
-  final List<String> correctOrder = ['1.png', '2.png', '3.png', '4.png'];
+  final List<String> correctOrder = ['3-1.jpg', '3-2.jpg', '3-3.jpg', '3-4.jpg'];
 
   // Random order for displaying at the top
-  List<String> shuffledOrder = ['3.png', '1.png', '4.png', '2.png'];
+  List<String> shuffledOrder = ['3-1.jpg', '3-3.jpg', '3-4.jpg', '3-2.jpg'];
 
   // List to hold the user's dragged images, initially empty (null represents empty)
   List<String?> placedImages = [null, null, null, null];

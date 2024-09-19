@@ -6,21 +6,21 @@ class HardScreen3 extends StatefulWidget {
 }
 
 class _SpellingGamePageState extends State<HardScreen3> {
-  String correctWord = 'tiger';
-  List<String> scrambledLetters = ['t', 'g', 'e', 'i', 'r'];
+  String correctWord = 'banana';
+  List<String> scrambledLetters = ['a', 'n', 'b', 'a', 'a', 'n'];
   List<String> userAnswer = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('LEVEL-1'),
+        title: Text('LEVEL-3'),
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/tiger.png', height: 200),
+            child: Image.asset('assets/banana.jpeg', height: 200),
           ),
           Text(
             'Arrange the letters:',
