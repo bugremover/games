@@ -15,11 +15,7 @@ class _LevelOneScreenState extends State<MediumScreen6> {
     '3.png',
     '4.png',
     '5.png',
-    '6.png',
-    '7.png',
-    '8.png',
-    '9.png',
-    '10.png'
+    '6.png'
   ];
 
   // Random order for displaying at the top
@@ -29,11 +25,7 @@ class _LevelOneScreenState extends State<MediumScreen6> {
     '4.png',
     '2.png',
     '5.png',
-    '6.png',
-    '8.png',
-    '7.png',
-    '9.png',
-    '10.png'
+    '6.png'
   ];
 
   // List to hold the user's dragged images, initially empty
@@ -59,7 +51,7 @@ class _LevelOneScreenState extends State<MediumScreen6> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('LEVEL-1'),
+        title: Text('LEVEL-6'),
       ),
       body: SingleChildScrollView(
         child: Column(

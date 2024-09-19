@@ -10,30 +10,22 @@ class MediumScreen3 extends StatefulWidget {
 class _LevelOneScreenState extends State<MediumScreen3> {
   // Correct order of image names
   final List<String> correctOrder = [
-    '1.png',
-    '2.png',
-    '3.png',
-    '4.png',
-    '5.png',
-    '6.png',
-    '7.png',
-    '8.png',
-    '9.png',
-    '10.png'
+    '8-1.png',
+    '8-2.png',
+    '8-3.png',
+    '8-4.png',
+    '8-5.png',
+    '8-6.png'
   ];
 
   // Random order for displaying at the top
   List<String> shuffledOrder = [
-    '3.png',
-    '1.png',
-    '4.png',
-    '2.png',
-    '5.png',
-    '6.png',
-    '8.png',
-    '7.png',
-    '9.png',
-    '10.png'
+    '8-5.png',
+    '8-6.png',
+    '8-3.png',
+    '8-1.png',
+    '8-4.png',
+    '8-2.png'
   ];
 
   // List to hold the user's dragged images, initially empty
@@ -59,7 +51,7 @@ class _LevelOneScreenState extends State<MediumScreen3> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('LEVEL-1'),
+        title: Text('LEVEL-3'),
       ),
       body: SingleChildScrollView(
         child: Column(
