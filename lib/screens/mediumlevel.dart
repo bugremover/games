@@ -94,28 +94,28 @@ class MediumLevelScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  ActivityButton(
-                    number: '6',
-                    onPressed: () {
-                      // Placeholder for other activities
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MediumScreen6()),
-                      );
-                    },
-                  ),
-                  ActivityButton(
-                    number: '7',
-                    onPressed: () {
-                      // Placeholder for other activities
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MediumScreen7()),
-                      );
-                    },
-                  ),
+                  // ActivityButton(
+                  //   number: '6',
+                  //   onPressed: () {
+                  //     // Placeholder for other activities
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => MediumScreen6()),
+                  //     );
+                  //   },
+                  // ),
+                  // ActivityButton(
+                  //   number: '7',
+                  //   onPressed: () {
+                  //     // Placeholder for other activities
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => MediumScreen7()),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),

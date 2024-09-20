@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:games/screens/basiclevel.dart';
 import 'package:games/screens/hardlevel.dart';
 import 'package:games/screens/mediumlevel.dart';
+import 'package:games/screens/streak.dart'; // Import your streak screen
 
-// ignore: use_key_in_widget_constructors
 class LevelSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,6 @@ class LevelSelectionScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        // Centering the column
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -47,7 +44,6 @@ class LevelSelectionScreen extends StatelessWidget {
               text: 'BASIC LEVEL',
               color: Colors.green,
               onPressed: () {
-                // Basic level action
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => BasicLevelScreen()),
@@ -58,7 +54,6 @@ class LevelSelectionScreen extends StatelessWidget {
               text: 'MEDIUM LEVEL',
               color: Colors.pinkAccent,
               onPressed: () {
-                // Medium level action
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => MediumLevelScreen()),
@@ -69,7 +64,6 @@ class LevelSelectionScreen extends StatelessWidget {
               text: 'HARD LEVEL',
               color: Colors.red,
               onPressed: () {
-                // Hard level action
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => HardLevelScreen()),
@@ -89,7 +83,15 @@ class LevelSelectionScreen extends StatelessWidget {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.local_fire_department, color: Colors.orange),
+                  IconButton(
+                    icon: Icon(Icons.local_fire_department, color: Colors.orange),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => StreakScreen()),
+                      );
+                    },
+                  ),
                   Text('1', style: TextStyle(color: Colors.black)),
                 ],
               ),

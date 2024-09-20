@@ -7,7 +7,7 @@ class HardScreen2 extends StatefulWidget {
 
 class _SpellingGamePageState extends State<HardScreen2> {
   String correctWord = 'peacock';
-  List<String> scrambledLetters = ['p', 'a', 'e', 'c', 'c','o','k'];
+  List<String> scrambledLetters = ['p', 'a', 'e', 'c', 'c', 'o', 'k'];
   List<String> userAnswer = [];
 
   @override
@@ -20,7 +20,7 @@ class _SpellingGamePageState extends State<HardScreen2> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/peacock.jpeg', height: 200),
+            child: Image.asset('../assets/peacock.jpeg', height: 200),
           ),
           Text(
             'Arrange the letters:',
@@ -33,7 +33,10 @@ class _SpellingGamePageState extends State<HardScreen2> {
               return Draggable<String>(
                 data: letter,
                 child: LetterBox(
-                    letter: userAnswer.contains(letter) ? '' : letter),
+                    letter: userAnswer.where((l) => l == letter).length <
+                        scrambledLetters.where((l) => l == letter).length
+                        ? letter
+                        : ''),
                 feedback: Material(
                   color: Colors.transparent,
                   child: LetterBox(letter: letter),
@@ -56,8 +59,8 @@ class _SpellingGamePageState extends State<HardScreen2> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(correctWord.length, (index) {
                   return LetterBox(
-                      letter:
-                          index < userAnswer.length ? userAnswer[index] : '');
+                    letter: index < userAnswer.length ? userAnswer[index] : '',
+                  );
                 }),
               );
             },

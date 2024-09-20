@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class HardScreen3 extends StatefulWidget {
   @override
-  _SpellingGamePageState createState() => _SpellingGamePageState();
+  _HardScreen3State createState() => _HardScreen3State();
 }
 
-class _SpellingGamePageState extends State<HardScreen3> {
-  String correctWord = 'banana';
-  List<String> scrambledLetters = ['a', 'n', 'b', 'a', 'a', 'n'];
+class _HardScreen3State extends State<HardScreen3> {
+  final String correctWord = 'banana';
+  late List<String> scrambledLetters;
   List<String> userAnswer = [];
+  String feedback = '';
+
+  @override
+  void initState() {
+    super.initState();
+    scrambledLetters = shuffleLetters(correctWord.split(''));
+  }
+
+  List<String> shuffleLetters(List<String> letters) {
+    letters.shuffle(Random());
+    return letters;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +33,36 @@ class _SpellingGamePageState extends State<HardScreen3> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/banana.jpeg', height: 200),
+            child: Image.asset('../assets/banana.jpeg', height: 200), // Ensure the asset path is correct
           ),
           Text(
             'Arrange the letters:',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
+          // Draggable letters
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: scrambledLetters.map((letter) {
               return Draggable<String>(
                 data: letter,
-                child: LetterBox(
-                    letter: userAnswer.contains(letter) ? '' : letter),
+                child: LetterBox(letter: letter),
                 feedback: Material(
                   color: Colors.transparent,
                   child: LetterBox(letter: letter),
                 ),
-                childWhenDragging: LetterBox(letter: ''),
+                childWhenDragging: LetterBox(letter: ''), // Hide the letter when dragging
               );
             }).toList(),
           ),
           SizedBox(height: 20),
+          // Drag target for user answer
           DragTarget<String>(
             onAccept: (letter) {
               setState(() {
                 if (userAnswer.length < correctWord.length) {
                   userAnswer.add(letter);
+                  scrambledLetters.remove(letter); // Remove the letter from scrambled letters
                 }
               });
             },
@@ -56,29 +71,37 @@ class _SpellingGamePageState extends State<HardScreen3> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(correctWord.length, (index) {
                   return LetterBox(
-                      letter:
-                          index < userAnswer.length ? userAnswer[index] : '');
+                    letter: index < userAnswer.length ? userAnswer[index] : '',
+                  );
                 }),
               );
             },
           ),
           SizedBox(height: 20),
+          // Submit button
           ElevatedButton(
             onPressed: checkAnswer,
             child: Text('Submit'),
           ),
           SizedBox(height: 20),
-          if (userAnswer.join() == correctWord)
-            Icon(Icons.check, color: Colors.green, size: 50),
-          if (userAnswer.join() != correctWord && userAnswer.isNotEmpty)
-            Icon(Icons.close, color: Colors.red, size: 50),
+          // Feedback text
+          Text(
+            feedback,
+            style: TextStyle(fontSize: 24, color: feedback == 'Correct!' ? Colors.green : Colors.red),
+          ),
         ],
       ),
     );
   }
 
   void checkAnswer() {
-    setState(() {});
+    setState(() {
+      if (userAnswer.join() == correctWord) {
+        feedback = 'Correct!';
+      } else {
+        feedback = 'Try again!';
+      }
+    });
   }
 }
 
@@ -105,4 +128,8 @@ class LetterBox extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(home: HardScreen3()));
 }

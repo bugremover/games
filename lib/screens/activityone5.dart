@@ -50,7 +50,7 @@ class _LevelOneScreenState extends State<LevelOneScreen5> {
                     (imageName) => Draggable<String>(
                       data: imageName,
                       feedback: Image.asset(
-                        'images/$imageName',
+                        '../assets/$imageName',
                         height: imageSize,
                         width: imageSize,
                       ),
@@ -60,7 +60,7 @@ class _LevelOneScreenState extends State<LevelOneScreen5> {
                         color: Colors.grey,
                       ),
                       child: Image.asset(
-                        'images/$imageName',
+                        '../assets/$imageName',
                         height: imageSize,
                         width: imageSize,
                       ),
@@ -100,7 +100,7 @@ class _LevelOneScreenState extends State<LevelOneScreen5> {
                               ),
                             )
                           : Image.asset(
-                              'images/${placedImages[index]}',
+                              '../assets/${placedImages[index]}',
                               height: imageSize,
                               width: imageSize,
                             ),

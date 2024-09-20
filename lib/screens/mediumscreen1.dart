@@ -29,7 +29,7 @@ class _LevelOneScreenState extends State<MediumScreen1> {
   ];
 
   // List to hold the user's dragged images, initially empty
-  List<String?> placedImages = List<String?>.filled(10, null);
+  List<String?> placedImages = List<String?>.filled(6, null);
 
   bool isCorrect = false;
 
@@ -44,89 +44,91 @@ class _LevelOneScreenState extends State<MediumScreen1> {
   Widget build(BuildContext context) {
     // Get screen width for adaptive layout
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     // Set fixed size for images and containers based on screen width
-    final double imageSize = screenWidth * 0.18; // 18% of the screen width
+    final double imageSize = screenWidth * 0.28; // Adjusted for three images in a row
 
     return Scaffold(
       appBar: AppBar(
         title: Text('LEVEL-1'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Randomly ordered images to drag from
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // 5 images per row
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
-                itemCount: shuffledOrder.length,
-                itemBuilder: (context, index) {
-                  return _buildDraggable(shuffledOrder[index], imageSize);
-                },
-              ),
-            ),
-
-            // Empty boxes where images will be dragged into
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // 5 images per row
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 1,
-                ),
-                itemCount: placedImages.length,
-                itemBuilder: (context, index) {
-                  return _buildDragTarget(index, imageSize);
-                },
-              ),
-            ),
-
-            // Submit button to check if the images are in the correct order
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  isCorrect = _checkOrder();
-                  if (isCorrect) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Correct!')),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Wrong Order! Try again.')),
-                    );
-                    // Reset placed images if the sequence is wrong
-                    placedImages = List<String?>.filled(10, null);
-                  }
-                });
-              },
-              child: Text('Submit'),
-            ),
-
-            if (isCorrect)
+      body: Container(
+        height: MediaQuery.of(context).size.height * 0.85, // Fixed height
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Randomly ordered images to drag from
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Congratulations!',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.green,
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3, // 3 images per row
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: shuffledOrder.length,
+                  itemBuilder: (context, index) {
+                    return _buildDraggable(shuffledOrder[index], imageSize);
+                  },
+                ),
+              ),
+
+              // Empty boxes where images will be dragged into
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3, // 3 images per row
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 1,
+                  ),
+                  itemCount: placedImages.length,
+                  itemBuilder: (context, index) {
+                    return _buildDragTarget(index, imageSize);
+                  },
+                ),
+              ),
+
+              // Submit button to check if the images are in the correct order
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    isCorrect = _checkOrder();
+                    if (isCorrect) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Correct!')),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Wrong Order! Try again.')),
+                      );
+                      // Reset placed images if the sequence is wrong
+                      placedImages = List<String?>.filled(6, null);
+                    }
+                  });
+                },
+                child: Text('Submit'),
+              ),
+
+              if (isCorrect)
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Congratulations!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.green,
+                    ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -147,7 +149,7 @@ class _LevelOneScreenState extends State<MediumScreen1> {
     return Draggable<String>(
       data: imageName,
       feedback: Image.asset(
-        'images/$imageName',
+        '../assets/$imageName',
         height: imageSize,
         width: imageSize,
       ),
@@ -157,7 +159,7 @@ class _LevelOneScreenState extends State<MediumScreen1> {
         color: Colors.grey,
       ),
       child: Image.asset(
-        'images/$imageName',
+        '../assets/$imageName',
         height: imageSize,
         width: imageSize,
         fit: BoxFit.cover,
@@ -180,21 +182,21 @@ class _LevelOneScreenState extends State<MediumScreen1> {
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 2),
             color:
-                placedImages[index] == null ? Colors.white : Colors.blue[100],
+            placedImages[index] == null ? Colors.white : Colors.blue[100],
           ),
           child: placedImages[index] == null
               ? Center(
-                  child: Text(
-                    '${index + 1}', // Label with numbers
-                    style: TextStyle(fontSize: 24),
-                  ),
-                )
+            child: Text(
+              '${index + 1}', // Label with numbers
+              style: TextStyle(fontSize: 24),
+            ),
+          )
               : Image.asset(
-                  'images/${placedImages[index]}',
-                  height: imageSize,
-                  width: imageSize,
-                  fit: BoxFit.cover,
-                ),
+            '../assets/${placedImages[index]}',
+            height: imageSize,
+            width: imageSize,
+            fit: BoxFit.cover,
+          ),
         );
       },
     );

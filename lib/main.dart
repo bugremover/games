@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: LevelSelectionScreen(),
+      home: LoginScreen(),
     );
   }
 }

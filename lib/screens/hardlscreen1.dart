@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class HardScreen1 extends StatefulWidget {
   @override
   _SpellingGamePageState createState() => _SpellingGamePageState();
@@ -20,7 +19,7 @@ class _SpellingGamePageState extends State<HardScreen1> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/tiger.jpeg', height: 200),
+            child: Image.asset('../assets/tiger.jpeg', height: 200),
           ),
           Text(
             'Arrange the letters:',

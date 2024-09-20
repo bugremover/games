@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class HardScreen6 extends StatefulWidget {
   @override
-  _SpellingGamePageState createState() => _SpellingGamePageState();
+  _HardScreen6State createState() => _HardScreen6State();
 }
 
-class _SpellingGamePageState extends State<HardScreen6> {
-  String correctWord = 'bicycle';
-  List<String> scrambledLetters = ['l', 'y', 'c', 'i', 'b', 'e', 'c'];
+class _HardScreen6State extends State<HardScreen6> {
+  final String correctWord = 'bicycle';
+  late List<String> scrambledLetters;
   List<String> userAnswer = [];
+  String feedback = '';
+
+  @override
+  void initState() {
+    super.initState();
+    scrambledLetters = shuffleLetters(correctWord.split(''));
+  }
+
+  List<String> shuffleLetters(List<String> letters) {
+    letters.shuffle(Random());
+    return letters;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +33,36 @@ class _SpellingGamePageState extends State<HardScreen6> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/tiger.png', height: 200),
+            child: Image.asset('../assets/bicycle.jpeg', height: 200), // Ensure the asset path is correct
           ),
           Text(
             'Arrange the letters:',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
+          // Draggable letters
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: scrambledLetters.map((letter) {
               return Draggable<String>(
                 data: letter,
-                child: LetterBox(
-                    letter: userAnswer.contains(letter) ? '' : letter),
+                child: LetterBox(letter: letter),
                 feedback: Material(
                   color: Colors.transparent,
                   child: LetterBox(letter: letter),
                 ),
-                childWhenDragging: LetterBox(letter: ''),
+                childWhenDragging: LetterBox(letter: ''), // Hide letter while dragging
               );
             }).toList(),
           ),
           SizedBox(height: 20),
+          // Drag target for user answer
           DragTarget<String>(
             onAccept: (letter) {
               setState(() {
                 if (userAnswer.length < correctWord.length) {
                   userAnswer.add(letter);
+                  scrambledLetters.remove(letter); // Remove the letter from scrambled letters
                 }
               });
             },
@@ -56,21 +71,23 @@ class _SpellingGamePageState extends State<HardScreen6> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(correctWord.length, (index) {
                   return LetterBox(
-                      letter:
-                          index < userAnswer.length ? userAnswer[index] : '');
+                    letter: index < userAnswer.length ? userAnswer[index] : '',
+                  );
                 }),
               );
             },
           ),
           SizedBox(height: 20),
+          // Submit button
           ElevatedButton(
             onPressed: checkAnswer,
             child: Text('Submit'),
           ),
           SizedBox(height: 20),
+          // Feedback icons
           if (userAnswer.join() == correctWord)
-            Icon(Icons.check, color: Colors.green, size: 50),
-          if (userAnswer.join() != correctWord && userAnswer.isNotEmpty)
+            Icon(Icons.check, color: Colors.green, size: 50)
+          else if (userAnswer.isNotEmpty)
             Icon(Icons.close, color: Colors.red, size: 50),
         ],
       ),
@@ -78,7 +95,9 @@ class _SpellingGamePageState extends State<HardScreen6> {
   }
 
   void checkAnswer() {
-    setState(() {});
+    setState(() {
+      // No additional logic needed; UI updates automatically
+    });
   }
 }
 
@@ -105,4 +124,8 @@ class LetterBox extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(home: HardScreen6()));
 }

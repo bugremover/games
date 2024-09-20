@@ -29,7 +29,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
   ];
 
   // List to hold the user's dragged images, initially empty
-  List<String?> placedImages = List<String?>.filled(10, null);
+  List<String?> placedImages = List<String?>.filled(6, null);
 
   bool isCorrect = false;
 
@@ -63,7 +63,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // 5 images per row
+                  crossAxisCount: 3, // 5 images per row
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   childAspectRatio: 1,
@@ -82,7 +82,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5, // 5 images per row
+                  crossAxisCount: 3, // 5 images per row
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                   childAspectRatio: 1,
@@ -108,7 +108,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
                       SnackBar(content: Text('Wrong Order! Try again.')),
                     );
                     // Reset placed images if the sequence is wrong
-                    placedImages = List<String?>.filled(10, null);
+                    placedImages = List<String?>.filled(6, null);
                   }
                 });
               },
@@ -147,7 +147,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
     return Draggable<String>(
       data: imageName,
       feedback: Image.asset(
-        'images/$imageName',
+        '../assets/$imageName',
         height: imageSize,
         width: imageSize,
       ),
@@ -157,7 +157,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
         color: Colors.grey,
       ),
       child: Image.asset(
-        'images/$imageName',
+        '../assets/$imageName',
         height: imageSize,
         width: imageSize,
         fit: BoxFit.cover,
@@ -190,7 +190,7 @@ class _LevelOneScreenState extends State<MediumScreen5> {
                   ),
                 )
               : Image.asset(
-                  'images/${placedImages[index]}',
+                  '../assets/${placedImages[index]}',
                   height: imageSize,
                   width: imageSize,
                   fit: BoxFit.cover,

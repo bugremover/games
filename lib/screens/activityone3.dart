@@ -9,13 +9,23 @@ class LevelOneScreen3 extends StatefulWidget {
 
 class _LevelOneScreenState extends State<LevelOneScreen3> {
   // Correct order of image names
-  final List<String> correctOrder = ['3-1.jpg', '3-2.jpg', '3-3.jpg', '3-4.jpg'];
+  final List<String> correctOrder = [
+    '3-1.jpg',
+    '3-2.jpg',
+    '3-3.jpg',
+    '3-4.jpg'
+  ];
 
   // Random order for displaying at the top
-  List<String> shuffledOrder = ['3-1.jpg', '3-3.jpg', '3-4.jpg', '3-2.jpg'];
+  List<String> shuffledOrder = [
+    '3-1.jpg',
+    '3-3.jpg',
+    '3-4.jpg',
+    '3-2.jpg'
+  ];
 
   // List to hold the user's dragged images, initially empty (null represents empty)
-  List<String?> placedImages = [null, null, null, null];
+  List<String?> placedImages = List<String?>.filled(4, null);
 
   bool isCorrect = false;
 
@@ -45,28 +55,26 @@ class _LevelOneScreenState extends State<LevelOneScreen3> {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: shuffledOrder
-                  .map(
-                    (imageName) => Draggable<String>(
-                      data: imageName,
-                      feedback: Image.asset(
-                        'images/$imageName',
-                        height: imageSize,
-                        width: imageSize,
-                      ),
-                      childWhenDragging: Container(
-                        height: imageSize,
-                        width: imageSize,
-                        color: Colors.grey,
-                      ),
-                      child: Image.asset(
-                        'images/$imageName',
-                        height: imageSize,
-                        width: imageSize,
-                      ),
-                    ),
-                  )
-                  .toList(),
+              children: List.generate(shuffledOrder.length, (index) {
+                return Draggable<String>(
+                  data: shuffledOrder[index],
+                  feedback: Image.asset(
+                    '../assets/${shuffledOrder[index]}',
+                    height: imageSize,
+                    width: imageSize,
+                  ),
+                  childWhenDragging: Container(
+                    height: imageSize,
+                    width: imageSize,
+                    color: Colors.grey,
+                  ),
+                  child: Image.asset(
+                    '../assets/${shuffledOrder[index]}',
+                    height: imageSize,
+                    width: imageSize,
+                  ),
+                );
+              }),
             ),
           ),
 
@@ -80,6 +88,8 @@ class _LevelOneScreenState extends State<LevelOneScreen3> {
                   onAccept: (receivedImage) {
                     setState(() {
                       placedImages[index] = receivedImage;
+                      // Remove the image from shuffledOrder to prevent duplicates
+                      shuffledOrder.remove(receivedImage);
                     });
                   },
                   builder: (context, accepted, rejected) {
@@ -94,16 +104,16 @@ class _LevelOneScreenState extends State<LevelOneScreen3> {
                       ),
                       child: placedImages[index] == null
                           ? Center(
-                              child: Text(
-                                '${index + 1}', // Label with numbers
-                                style: TextStyle(fontSize: 24),
-                              ),
-                            )
+                        child: Text(
+                          '${index + 1}', // Label with numbers
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      )
                           : Image.asset(
-                              'images/${placedImages[index]}',
-                              height: imageSize,
-                              width: imageSize,
-                            ),
+                        '../assets/${placedImages[index]}',
+                        height: imageSize,
+                        width: imageSize,
+                      ),
                     );
                   },
                 );
@@ -125,7 +135,15 @@ class _LevelOneScreenState extends State<LevelOneScreen3> {
                     SnackBar(content: Text('Wrong Order! Try again.')),
                   );
                   // Reset placed images if the sequence is wrong
-                  placedImages = [null, null, null, null];
+                  placedImages = List<String?>.filled(4, null);
+                  // Reset shuffled order to original state
+                  shuffledOrder = [
+                    '3-1.jpg',
+                    '3-3.jpg',
+                    '3-4.jpg',
+                    '3-2.jpg'
+                  ];
+                  shuffledOrder.shuffle();
                 }
               });
             },

@@ -20,7 +20,7 @@ class _SpellingGamePageState extends State<HardScreen4> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/tiger.png', height: 200),
+            child: Image.asset('../assets/snake.jpeg', height: 200),
           ),
           Text(
             'Arrange the letters:',
